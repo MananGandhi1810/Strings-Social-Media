@@ -20,6 +20,7 @@ class _PostTileState extends State<PostTile> {
   void fetchUserData() async {
     userData = await UserRepository().getUserById(widget.post.authorId);
     setState(() {});
+    debugPrint("User data: ${userData!.photoUrl} ${userData!.name}");
   }
 
   @override
@@ -82,6 +83,23 @@ class _PostTileState extends State<PostTile> {
                   ),
                 ),
               ),
+              widget.post.images == null || widget.post.images!.isEmpty
+                  ? const SizedBox.shrink()
+                  : SizedBox(
+                      height: 100,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: widget.post.images!.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.network(
+                              widget.post.images![index],
+                            ),
+                          );
+                        },
+                      ),
+                  ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

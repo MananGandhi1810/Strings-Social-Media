@@ -21,6 +21,7 @@ class NewPostTile extends StatefulWidget {
 class _NewPostTileState extends State<NewPostTile> {
   final TextEditingController _postController = TextEditingController();
   List<String> _images = [];
+  List<String> _imageUrls = [];
   var user;
   var userData;
 
@@ -121,13 +122,13 @@ class _NewPostTileState extends State<NewPostTile> {
           }
           if(!_images.isEmpty) {
             for (var image in _images) {
-              await ImageHandlerRepository().uploadPostImage(user!.uid, uuid.v4(), image);
+              _imageUrls.add(await ImageHandlerRepository().uploadPostImage(user!.uid, uuid.v4(), image));
             }
           }
           PostModel newPost = PostModel(
             id: uuid.v4(),
             content: _postController.text,
-            images: _images,
+            images: _imageUrls,
             authorId: user!.uid,
             timestamp: Timestamp.now(),
             likes: 0,
@@ -140,6 +141,7 @@ class _NewPostTileState extends State<NewPostTile> {
           setState(() {
             _postController.clear();
             _images.clear();
+            _imageUrls.clear();
           });
         },
         child: const Text("Post"),
