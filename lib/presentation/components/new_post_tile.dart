@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:strings_social_media/models/post_model.dart';
@@ -20,13 +21,13 @@ class NewPostTile extends StatefulWidget {
 
 class _NewPostTileState extends State<NewPostTile> {
   final TextEditingController _postController = TextEditingController();
-  List<String> _images = [];
-  List<String> _imageUrls = [];
-  var user;
+  final List<String> _images = [];
+  final List<String> _imageUrls = [];
+  late User? user;
   var userData;
 
   void fetchCurrentUser() async {
-    user = await AuthRepository().currentUser;
+    user = AuthRepository().currentUser;
     userData = await UserRepository().getUserById(user!.uid);
     setState(() {});
   }
@@ -72,7 +73,7 @@ class _NewPostTileState extends State<NewPostTile> {
           IconButton(
             onPressed: () {
               ImagePicker().pickMultiImage().then((images) {
-                if (images != null) {
+                if (images.isNotEmpty) {
                   setState(() {
                     for (var image in images) {
                       _images.add(image.path);
@@ -120,9 +121,10 @@ class _NewPostTileState extends State<NewPostTile> {
           if (_postController.text.isEmpty) {
             return;
           }
-          if(!_images.isEmpty) {
+          if (!_images.isEmpty) {
             for (var image in _images) {
-              _imageUrls.add(await ImageHandlerRepository().uploadPostImage(user!.uid, uuid.v4(), image));
+              _imageUrls.add(await ImageHandlerRepository()
+                  .uploadPostImage(user!.uid, uuid.v4(), image));
             }
           }
           PostModel newPost = PostModel(

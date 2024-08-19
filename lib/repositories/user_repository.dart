@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:strings_social_media/models/post_model.dart';
 
 import '../models/user_model.dart';
 

@@ -20,7 +20,7 @@ class RootApp extends StatefulWidget {
 }
 
 class _RootAppState extends State<RootApp> {
-  Brightness _brightness = Brightness.dark;
+  final Brightness _brightness = Brightness.dark;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _RootAppState extends State<RootApp> {
           ),
         ),
       ),
-      home: SplashPage(),
+      home: const SplashPage(),
     );
   }
 }

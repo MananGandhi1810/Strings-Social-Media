@@ -26,8 +26,8 @@ class AuthRepository {
     return await _firebaseAuth.signOut();
   }
 
-  Future<User?> get currentUser async {
-    return await _firebaseAuth.currentUser;
+  User? get currentUser {
+    return _firebaseAuth.currentUser;
   }
 
   Future<void> sendPasswordResetEmail(String email) async {

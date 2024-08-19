@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:strings_social_media/repositories/auth_repository.dart';
 import 'package:strings_social_media/repositories/post_repository.dart';
-import 'package:uuid/uuid.dart';
 
 import '../models/post_model.dart';
 import 'components/new_post_tile.dart';
