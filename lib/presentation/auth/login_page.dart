@@ -119,7 +119,8 @@ class _LoginPageState extends State<LoginPage> {
             try {
               debugPrint("Email: ${_emailController.text}");
               debugPrint("Password: ${_passwordController.text}");
-              var userCredentials = await AuthRepository().signInWithEmailAndPassword(
+              var userCredentials =
+                  await AuthRepository().signInWithEmailAndPassword(
                 _emailController.text,
                 _passwordController.text,
               );

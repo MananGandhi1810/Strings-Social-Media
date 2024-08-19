@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class PostModel{
+class PostModel {
   final String id;
   final String content;
   final List<dynamic>? images;
@@ -25,7 +25,7 @@ class PostModel{
     required this.parentAuthorId,
   });
 
-  factory PostModel.fromDoc(dynamic doc){
+  factory PostModel.fromDoc(dynamic doc) {
     return PostModel(
       id: doc.id,
       content: doc['content'],
@@ -40,7 +40,7 @@ class PostModel{
     );
   }
 
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'content': content,

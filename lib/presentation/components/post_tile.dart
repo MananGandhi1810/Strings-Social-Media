@@ -87,7 +87,7 @@ class _PostTileState extends State<PostTile> {
                   ? const SizedBox.shrink()
                   : SizedBox(
                       height: 100,
-                    child: ListView.builder(
+                      child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: widget.post.images!.length,
                         itemBuilder: (context, index) {
@@ -99,7 +99,7 @@ class _PostTileState extends State<PostTile> {
                           );
                         },
                       ),
-                  ),
+                    ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

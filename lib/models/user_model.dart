@@ -1,4 +1,4 @@
-class UserModel{
+class UserModel {
   final String uid;
   final String name;
   final String email;
@@ -13,7 +13,7 @@ class UserModel{
     required this.bio,
   });
 
-  factory UserModel.fromDoc(dynamic doc){
+  factory UserModel.fromDoc(dynamic doc) {
     return UserModel(
       uid: doc.id,
       name: doc['name'],
@@ -23,7 +23,7 @@ class UserModel{
     );
   }
 
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return {
       'uid': uid,
       'name': name,

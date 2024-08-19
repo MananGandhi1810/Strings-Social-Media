@@ -47,9 +47,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: userData == null
                     ? const CircularProgressIndicator()
                     : userData!.photoUrl == null
-                    ? const FlutterLogo()
-                    : Image.network(
-                    userData!.photoUrl!),
+                        ? const FlutterLogo()
+                        : Image.network(userData!.photoUrl!),
               ),
             ),
             const Padding(

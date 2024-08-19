@@ -17,12 +17,16 @@ class PostRepository {
   }
 
   Future<List<PostModel>> getPosts() async {
-    final snapshot = await _firestore.collection('posts').orderBy("timestamp").get();
+    final snapshot =
+        await _firestore.collection('posts').orderBy("timestamp").get();
     return snapshot.docs.map((doc) => PostModel.fromDoc(doc)).toList();
   }
 
   Stream<QuerySnapshot> getPostsAsStream() {
-    return _firestore.collection('posts').orderBy("timestamp", descending: true).snapshots();
+    return _firestore
+        .collection('posts')
+        .orderBy("timestamp", descending: true)
+        .snapshots();
   }
 
   Future<List<PostModel>> getPostsByAuthorId(String authorId) async {

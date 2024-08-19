@@ -29,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
     r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+',
   );
   XFile? _image;
-  String? imageUrl = null;
+  String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -213,21 +213,21 @@ class _RegisterPageState extends State<RegisterPage> {
                 _emailController.text,
                 _passwordController.text,
               );
-              User? user = await AuthRepository().currentUser;
+              User? user = AuthRepository().currentUser;
               if (_image != null) {
                 imageUrl = await ImageHandlerRepository().uploadProfilePicture(
                   user!.uid,
                   _image!.path,
                 );
               }
-              UserModel _newUser = UserModel(
+              UserModel newUser = UserModel(
                 email: _emailController.text,
                 name: _nameController.text,
                 bio: _bioController.text,
                 photoUrl: imageUrl,
                 uid: user!.uid,
               );
-              await UserRepository().createUser(_newUser);
+              await UserRepository().createUser(newUser);
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                   builder: (context) => const SplashPage(),

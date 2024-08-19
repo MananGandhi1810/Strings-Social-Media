@@ -10,6 +10,7 @@ import 'package:strings_social_media/repositories/profile_picture_repository.dar
 import 'package:strings_social_media/repositories/user_repository.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../models/user_model.dart';
 import '../../repositories/post_repository.dart';
 
 class NewPostTile extends StatefulWidget {
@@ -24,7 +25,7 @@ class _NewPostTileState extends State<NewPostTile> {
   final List<String> _images = [];
   final List<String> _imageUrls = [];
   late User? user;
-  var userData;
+  late UserModel? userData;
 
   void fetchCurrentUser() async {
     user = AuthRepository().currentUser;
@@ -121,7 +122,7 @@ class _NewPostTileState extends State<NewPostTile> {
           if (_postController.text.isEmpty) {
             return;
           }
-          if (!_images.isEmpty) {
+          if (_images.isNotEmpty) {
             for (var image in _images) {
               _imageUrls.add(await ImageHandlerRepository()
                   .uploadPostImage(user!.uid, uuid.v4(), image));

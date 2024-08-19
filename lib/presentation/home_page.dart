@@ -22,36 +22,34 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const FlutterLogo(
-          size: 50,
+        appBar: AppBar(
+          title: const FlutterLogo(
+            size: 50,
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: PostRepository().getPostsAsStream(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasData) {
-            final posts = snapshot.data!.docs
-                .map((e) => PostModel.fromDoc(e))
-                .toList();
-            return ListView.builder(
-              itemCount: posts.length + 1,
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  return const NewPostTile();
-                }
-                return PostTile(
-                  post: posts[index - 1],
-                );
-              },
+        body: StreamBuilder<QuerySnapshot>(
+          stream: PostRepository().getPostsAsStream(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasData) {
+              final posts =
+                  snapshot.data!.docs.map((e) => PostModel.fromDoc(e)).toList();
+              return ListView.builder(
+                itemCount: posts.length + 1,
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return const NewPostTile();
+                  }
+                  return PostTile(
+                    post: posts[index - 1],
+                  );
+                },
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      )
-    );
+          },
+        ));
   }
 }

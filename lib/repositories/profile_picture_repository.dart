@@ -14,9 +14,11 @@ class ImageHandlerRepository {
     return await snapshot.ref.getDownloadURL();
   }
 
-  Future<String> uploadPostImage(String uid, String imageUid, String filePath) async {
+  Future<String> uploadPostImage(
+      String uid, String imageUid, String filePath) async {
     String extension = filePath.split('.').last;
-    var ref = firebaseStorage.ref().child('post_images/$uid/$imageUid.$extension');
+    var ref =
+        firebaseStorage.ref().child('post_images/$uid/$imageUid.$extension');
     var file = File(filePath);
     var uploadTask = ref.putFile(file);
     var snapshot = await uploadTask.whenComplete(() => null);
